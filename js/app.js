@@ -3,6 +3,7 @@
 
 
 class Character {
+
     constructor(sprite,col,row){
         this.sprite = sprite;
         this.x = col * 101;
@@ -11,6 +12,10 @@ class Character {
 
     render(){
       ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+
+    update(dt){
+
     }
 
 }
@@ -24,24 +29,25 @@ class Player extends Character{
     handleInput(bt){
 
         switch(bt){
-            case 'left' :
-
-            break;
-            case 'right':
-
+            case 'left' :                              
+                this.x-= (this.x <= 0 ) ? 0 : 101;
             break;
 
-            case 'up':
+            case 'right':                
+                this.x+= (this.x >= 404 ) ? 0 : 101;              
+            break;
 
+            case 'up':                
+                this.y-= (this.y <= 70 ) ? -350 : 70;
+                this.x = (this.y == 350 ) ? 202: this.x;                                
             break;
 
             case 'down':
-
+                this.y += (this.y >= 420 ) ? 0 : 70;                          
             break;
         }
 
     }
-
     update(){
 
     }
@@ -50,7 +56,8 @@ class Player extends Character{
 class Enemy extends Character {
     constructor(sprite,col,row,speed){
         super(sprite,col,row,speed);
-        this.speed = speed;
+
+        this.speed = speed;        
     }
     // As variáveis aplicadas a nossas instâncias entram aqui.
     // Fornecemos uma a você para que possa começcar.
@@ -61,8 +68,27 @@ class Enemy extends Character {
 
     //this.sprite = 'images/enemy-bug.png';
     update(){
-        
+        this.x += 1 * this.speed;
+        if(this.x >= 505){
+            let auxSpeed = Math.floor(Math.random() * Math.floor(15));
+            this.speed = (auxSpeed < 3) ? 3 : auxSpeed;            
+            this.x = -40 * this.speed;            
+        }
     }
+}
+
+function checkCollisions(){
+
+    if(player.x == allEnemies[0].x && player.y == allEnemies[0].y){
+        console.log(player.x);
+        console.log(player.y);
+        console.log(allEnemies[0].x);
+        console.log(allEnemies[0].y);
+
+        allEnemies[0].speed = 0;
+        console.log("bateu");
+    }
+
 }
 
 //console.log(ctx);
@@ -88,13 +114,16 @@ class Enemy extends Character {
 // Represente seus objetos como instâncias.
 // Coloque todos os objetos inimgos numa array allEnemies
 // Coloque o objeto do jogador numa variável chamada jogador.
-let player = new Player('images/char-horn-girl.png',1,3);
+let player = new Player('images/char-horn-girl.png',2,5);
 
 let allEnemies = [
-    new Enemy('images/enemy-bug.png', 1, 2, 230),
-    //new Enemy('images/enemy-bug.png', 1, 2, 230),
-    //new Enemy('images/enemy-bug.png', 1, 2, 230),
-    ];
+    new Enemy('images/enemy-bug.png', -1, 1, 3),
+    new Enemy('images/enemy-bug.png', -2, 2, 5),
+    new Enemy('images/enemy-bug.png', -3, 3, 6),
+    new Enemy('images/enemy-bug.png', -4, 1, 8),
+    new Enemy('images/enemy-bug.png', -5, 2, 10),
+    new Enemy('images/enemy-bug.png', -6, 3, 12),
+];
 
 
 // Isto reconhece cliques em teclas e envia as chaves para seu
