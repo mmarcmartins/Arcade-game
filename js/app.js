@@ -12,51 +12,51 @@ class Character {
 
     render(){
       ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    }
+  }
 
-    update(dt){
+  update(dt){
 
-    }
+  }
 
 }
 
 class Player extends Character{
 
-     constructor(sprite,col,row){
-        super(sprite,col,row);
-    } 
+ constructor(sprite,col,row){
+    super(sprite,col,row);
 
-    handleInput(bt){
+} 
 
-        switch(bt){
-            case 'left' :                              
-                this.x-= (this.x <= 0 ) ? 0 : 101;
-            break;
+handleInput(bt){
 
-            case 'right':                
-                this.x+= (this.x >= 404 ) ? 0 : 101;              
-            break;
+    switch(bt){
+        case 'left' :                              
+        this.x-= (this.x <= 0 ) ? 0 : 101;
+        break;
 
-            case 'up':                
-                this.y-= (this.y <= 70 ) ? -350 : 70;
-                this.x = (this.y == 350 ) ? 202: this.x;                                
-            break;
+        case 'right':                
+        this.x+= (this.x >= 404 ) ? 0 : 101;              
+        break;
 
-            case 'down':
-                this.y += (this.y >= 420 ) ? 0 : 70;                          
-            break;
-        }
+        case 'up':                
+        this.y-= (this.y <= 70 ) ? -350 : 70;
+        this.x = (this.y == 350 ) ? 202: this.x;                                
+        break;
 
+        case 'down':
+        this.y += (this.y >= 420 ) ? 0 : 70;                          
+        break;
     }
-    update(){
 
-    }
+}
+update(){
+
+}
 }
 
 class Enemy extends Character {
     constructor(sprite,col,row,speed){
         super(sprite,col,row,speed);
-
         this.speed = speed;        
     }
     // As variáveis aplicadas a nossas instâncias entram aqui.
@@ -67,34 +67,32 @@ class Enemy extends Character {
     // com facilidade.
 
     //this.sprite = 'images/enemy-bug.png';
-    update(){
-        this.x += 1 * this.speed;
+    update(dt){        
+        this.x += 1 * this.speed * dt * 80;
         if(this.x >= 505){
             let auxSpeed = Math.floor(Math.random() * Math.floor(15));
             this.speed = (auxSpeed < 3) ? 3 : auxSpeed;            
-            this.x = -40 * this.speed;            
+            this.x = -40 * this.speed ;            
         }
     }
 }
 
 function checkCollisions(){
 
-    if(player.x == allEnemies[0].x && player.y == allEnemies[0].y){
-        console.log(player.x);
-        console.log(player.y);
-        console.log(allEnemies[0].x);
-        console.log(allEnemies[0].y);
-
-        allEnemies[0].speed = 0;
-        console.log("bateu");
-    }
-
+    for( const enemy of allEnemies){
+       if( enemy.x  >= ( player.x - 90 )  && enemy.x <= ( player.x + 90 )  && player.y === enemy.y ) {
+            player.x = 202;
+            player.y = 350;
+       }
+   }
+   
 }
 
 //console.log(ctx);
 
 // Atualize a posição do inimigo, método exigido pelo jogo
 // Parâmetro: dt, um delta de tempo entre ticks
+
 //Enemy.prototype.update = function(dt) {
     // Você deve multiplicar qualquer movimento pelo parâmetro
     // dt, o que garantirá que o jogo rode na mesma velocidade
@@ -117,13 +115,13 @@ function checkCollisions(){
 let player = new Player('images/char-horn-girl.png',2,5);
 
 let allEnemies = [
-    new Enemy('images/enemy-bug.png', -1, 1, 3),
+new Enemy('images/enemy-bug.png', -1, 1, 3),
     new Enemy('images/enemy-bug.png', -2, 2, 5),
     new Enemy('images/enemy-bug.png', -3, 3, 6),
     new Enemy('images/enemy-bug.png', -4, 1, 8),
     new Enemy('images/enemy-bug.png', -5, 2, 10),
     new Enemy('images/enemy-bug.png', -6, 3, 12),
-];
+    ];
 
 
 // Isto reconhece cliques em teclas e envia as chaves para seu
