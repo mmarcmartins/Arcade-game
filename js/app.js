@@ -15,7 +15,6 @@ class Character {
   }
 
   update(dt){
-
   }
 
 }
@@ -49,9 +48,9 @@ handleInput(bt){
     }
 
 }
-update(){
+    update(){
 
-}
+    }
 }
 
 class Enemy extends Character {
@@ -67,7 +66,7 @@ class Enemy extends Character {
     // com facilidade.
 
     //this.sprite = 'images/enemy-bug.png';
-    update(dt){        
+    update(dt){                
         this.x += 1 * this.speed * dt * 80;
         if(this.x >= 505){
             let auxSpeed = Math.floor(Math.random() * Math.floor(15));
@@ -83,12 +82,14 @@ function checkCollisions(){
        if( enemy.x  >= ( player.x - 90 )  && enemy.x <= ( player.x + 90 )  && player.y === enemy.y ) {
             player.x = 202;
             player.y = 350;
+            ctx.clearRect(0,0,ctx.width,ctx.height);
+            
        }
    }
    
 }
 
-//console.log(ctx);
+
 
 // Atualize a posição do inimigo, método exigido pelo jogo
 // Parâmetro: dt, um delta de tempo entre ticks
@@ -115,13 +116,15 @@ function checkCollisions(){
 let player = new Player('images/char-horn-girl.png',2,5);
 
 let allEnemies = [
-new Enemy('images/enemy-bug.png', -1, 1, 3),
+
+    new Enemy('images/enemy-bug.png', -1, 1, 3),
     new Enemy('images/enemy-bug.png', -2, 2, 5),
     new Enemy('images/enemy-bug.png', -3, 3, 6),
     new Enemy('images/enemy-bug.png', -4, 1, 8),
     new Enemy('images/enemy-bug.png', -5, 2, 10),
     new Enemy('images/enemy-bug.png', -6, 3, 12),
-    ];
+
+];
 
 
 // Isto reconhece cliques em teclas e envia as chaves para seu
