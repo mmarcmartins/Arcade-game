@@ -43,10 +43,8 @@ handleInput(bt){
         this.x+= (this.x >= 404 ) ? 0 : 101;              
         break;
 
-        case 'up':                
-        console.log(this.y);
+        case 'up':                        
         this.y-= (this.y <= 70 ) ? -280 : 70;
-
         this.x = (this.y == 350 ) ? 202: this.x;                                
         break;
 
