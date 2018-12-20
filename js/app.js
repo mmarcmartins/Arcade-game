@@ -7,6 +7,7 @@ document.onreadystatechange = () => {
      res = document.querySelector(".restart");     
  }
 };
+console.log("teste");
 
 class Character {
     constructor(sprite,col,row){
