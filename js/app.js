@@ -29,35 +29,39 @@ class Player extends Character{
  constructor(sprite,col,row){
     super(sprite,col,row,status);
     this.status = status;
-    this.vidas = [60,90,120];    
+    this.vidas = [60,90,120];
+    this.pontos = 0;    
 }
 
-handleInput(bt){
+handleInput(bt){  
+    if(this.status!==0){
+      switch(bt){
 
-    switch(bt){
-        case 'left' :                              
-        this.x-= (this.x <= 0 ) ? 0 : 101;
-        break;
+          case 'left' :                              
+          this.x-= (this.x <= 0 ) ? 0 : 101;
+          break;
 
-        case 'right':                            
-        this.x+= (this.x >= 404 ) ? 0 : 101;              
-        break;
+          case 'right':                            
+          this.x+= (this.x >= 404 ) ? 0 : 101;              
+          break;
 
-        case 'up':                        
-        this.y-= (this.y <= 70 ) ? -280 : 70;
-        this.x = (this.y == 350 ) ? 202: this.x;                                
-        break;
+          case 'up':                        
+          this.y-= (this.y <= 70 ) ? -280 : 70;
+          this.x = (this.y === 350 ) ? 202: this.x;
 
-        case 'down':
-        this.y += (this.y >= 420 ) ? 0 : 70;                          
-        break;
+          if(this.y === 350 && this.x === 202)
+          this.pontos++; 
 
-        case 'enter':
+          break;
 
-        if(this.status === 0)
-           restartGame();
-
-       break;
+          case 'down':
+          this.y += (this.y >= 420 ) ? 0 : 70;                          
+          break;
+     }
+   }else{
+      if(bt === "enter"){
+        restartGame();
+      }
    }
 
 }   
@@ -68,10 +72,14 @@ render(){
     if(this.status === 0 ){
         loseGame();            
     }
+
     ctx.font =  "18px Arial"
     ctx.textAlign = "center";
     ctx.strokeWidth = 1;
     ctx.fillText("Vidas: ",30,40);
+    ctx.fillText("Pontos:",420,40);
+    ctx.fillText(this.pontos,470,40);
+
     for(const vida of this.vidas){
       ctx.drawImage(Resources.get('images/Heart.png'),vida,13,30,40);
   }
@@ -98,7 +106,7 @@ class Enemy extends Character {
     update(dt){                
         this.x += 1 * this.speed * dt * 80;
         if(this.x >= 505){
-            let auxSpeed = Math.floor(Math.random() * Math.floor(15));
+            let auxSpeed = Math.floor(Math.random() * Math.floor(9));
             this.speed = (auxSpeed < 3) ? 3 : auxSpeed;            
             this.x = -40 * this.speed ;            
         }
@@ -109,27 +117,28 @@ function checkCollisions(){
     for( const enemy of allEnemies){
        if( enemy.x  >= ( player.x - 90 )  && enemy.x <= ( player.x + 90 )  && player.y === enemy.y ) {
         player.vidas.splice(-1,1);
-        if(player.vidas.length > 0){
-          player.x = 202;
-          player.y = 350;                       
-      } else {                  
-       player.status = 0;
-       res.style.display = "block";
-   }
-}
-}
-
+            if(player.vidas.length > 0){
+              player.x = 202;
+              player.y = 350;                       
+          } else {                  
+           player.status = 0;
+           res.style.display = "block";
+       }
+    }
+  }
 }
 
 function loseGame(){        
     player.y = 350;
     player.x = 202;
-    allEnemies.length = 0 ;
+    allEnemies.length = 0;
+    player.pontos = 0;
     ctx.drawImage(Resources.get('images/gameover.png'),0,50,505,606);
 
 }
 
 function restartGame(){
+    player.pontos = 0;
     player.vidas.length = 0;
     player.vidas =  [60,90,120];
     allEnemies = originalEnemiesPosition.slice(0);
@@ -163,12 +172,12 @@ let player = new Player('images/char-horn-girl.png',2,5,1);
 
 let allEnemies = [
 
-new Enemy('images/enemy-bug.png', -1, 1, 9),
-new Enemy('images/enemy-bug.png', -2, 2, 8),
-new Enemy('images/enemy-bug.png', -3, 3, 15),
-new Enemy('images/enemy-bug.png', -4, 1, 8),
-new Enemy('images/enemy-bug.png', -5, 2, 10),
-new Enemy('images/enemy-bug.png', -6, 3, 12),
+  new Enemy('images/enemy-bug.png', -1, 1, 3),
+  new Enemy('images/enemy-bug.png', -3, 2, 4),
+  new Enemy('images/enemy-bug.png', -5, 3, 7),
+  new Enemy('images/enemy-bug.png', -6, 1, 8),
+  new Enemy('images/enemy-bug.png', -8, 2, 8),
+  new Enemy('images/enemy-bug.png', -10, 3, 9),
 
 ];
 

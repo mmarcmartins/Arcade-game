@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Major+Mono+Display');
 *{
 	outline: none;
+	box-sizing: border-box;
 }
 body {
 	text-align: center;
@@ -9,7 +10,7 @@ body {
 	font-size: 27px;
 	background-image: url(../images/bgapp.png);
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: cover;	
 }
 
 
