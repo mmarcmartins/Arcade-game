@@ -73,7 +73,7 @@ render(){
         loseGame();            
     }
 
-    ctx.font =  "18px Arial"
+    ctx.font =  "18px Arial";
     ctx.textAlign = "center";
     ctx.strokeWidth = 1;
     ctx.fillText("Vidas: ",30,40);
@@ -84,9 +84,7 @@ render(){
       ctx.drawImage(Resources.get('images/Heart.png'),vida,13,30,40);
   }
 }
-update(){
 
-}
 
 }
 
@@ -106,8 +104,7 @@ class Enemy extends Character {
     update(dt){                
         this.x += 1 * this.speed * dt * 80;
         if(this.x >= 505){
-            let auxSpeed = Math.floor(Math.random() * Math.floor(9));
-            this.speed = (auxSpeed < 3) ? 3 : auxSpeed;            
+            this.speed = Math.floor(Math.random() * (9 - 3 + 1)) + 3;             
             this.x = -40 * this.speed ;            
         }
     }

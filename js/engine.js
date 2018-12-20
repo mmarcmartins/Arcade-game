@@ -99,8 +99,7 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-
-        player.update();
+        
     }
 
     /* Esta função primeiro deseha o "nível do jogo" e, depois, chama a
