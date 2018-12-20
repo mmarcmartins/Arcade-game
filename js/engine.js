@@ -169,7 +169,7 @@ var Engine = (function(global) {
      * método init().
      */
     function reset() {
-        // noop
+
     }
 
     /* Vá em frente e carregue todas as imagens que sabemos que serão
@@ -181,6 +181,8 @@ var Engine = (function(global) {
         'images/stone-block.png',
         'images/water-block.png',
         'images/grass-block.png',
+        'images/Heart.png',
+        'images/gameover.png',
         'images/enemy-bug.png',
         'images/char-horn-girl.png'
     ]);
