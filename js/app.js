@@ -163,12 +163,12 @@ let player = new Player('images/char-horn-girl.png',2,5,1);
 
 let allEnemies = [
 
-/*new Enemy('images/enemy-bug.png', -1, 1, 9),
+new Enemy('images/enemy-bug.png', -1, 1, 9),
 new Enemy('images/enemy-bug.png', -2, 2, 8),
 new Enemy('images/enemy-bug.png', -3, 3, 15),
 new Enemy('images/enemy-bug.png', -4, 1, 8),
 new Enemy('images/enemy-bug.png', -5, 2, 10),
-new Enemy('images/enemy-bug.png', -6, 3, 12),*/
+new Enemy('images/enemy-bug.png', -6, 3, 12),
 
 ];
 
