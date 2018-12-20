@@ -105,7 +105,7 @@ class Enemy extends Character {
         this.x += 1 * this.speed * dt * 80;
         if(this.x >= 505){
             this.speed = Math.floor(Math.random() * (9 - 3 + 1)) + 3;             
-            this.x = -40 * this.speed ;            
+            this.x = -40 * this.speed;            
         }
     }
 }
