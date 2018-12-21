@@ -4,7 +4,7 @@ Arcade game using canvas, used as proof of knowledge acquired in the Advanced Na
 # Instructions
 Clone the repository:
 
-https://github.com/mmarcmartins/arcade/
+https://github.com/mmarcmartins/arcade.git
 or download the project to your computer
 
 Steps to start the game
