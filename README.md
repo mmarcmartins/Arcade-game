@@ -9,7 +9,7 @@ or download the project to your computer
 
 Steps to start the game
 
-Open the index.html file on any browser and have fun or <a href="mmarcmartins.github.io/arcade/" target="_blank">play the online version.</a>
+Open the index.html file on any browser and have fun or <a href="http://mmarcmartins.github.io/arcade/" target="_blank">play the online version.</a>
 
 # How to play
 The main objective with the game is to to achieve the top of the board without touch any enemies. Each time you do that, you lose one of your three lifes, and each time that you does touch the top of the board, you get a point.
